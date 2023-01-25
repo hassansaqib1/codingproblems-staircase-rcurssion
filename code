@@ -1,1 +1,53 @@
+//
+//  main.cpp
+//  fibonaccisequ
+//
+//  Created by Hassan Saqib on 09/11/2022.
+//  the program uses recusion to print steps and number of path
+
+
+ 
+#include <iostream>
+#include <queue>
+using namespace std;
+
+long staircase(long n,std::queue<long> q1){ //this fuction uses recusion to reach from top stair case to bottom level and putting the number in queue
+    if (n==0 || n==1) {//this is the ending codition of each recursive call
+        q1.push(n);
+        cout<<"Path:";
+        long previous=q1.front();//here we will subtract the previous stair number with the next to calculate each step and display it
+        for (int i=0; i<=q1.size(); i++) {
+            q1.pop();
+            cout<<previous-q1.front()<<",";
+            previous=q1.front();
+        }
+        cout<<q1.front()<<endl;
+        return 1;
+    }
+    else{
+        q1.push(n);
+        return staircase(n-1,q1)+staircase(n-2,q1);
+
+    }
+    return NULL;
+}
+
+void driver(long n){
+//this fuction will make a queue to pass in the fuction of staircase
+    queue<long> q1;
+    cout<<staircase(n,q1)<<" is the total no of paths."<<endl;//new recussive fuctions are called in this line of code
+}
+
+
+
+
+
+int main(int argc, const char * argv[]) {
+    int n ;
+    cout<<"Enter the number for which u\you want to calculate staircases:";
+    cin>>n;
+    driver(n);//this  fuction is a driver fuction which works as a much easer fuction to call the main staircase fuction without passing arguments
+
+    return 0;
+}
 
